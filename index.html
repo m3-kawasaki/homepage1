@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>シニア世代向けホームページ</title>
+    <title>awatake | 79歳、AIとつくる毎日。</title>
+    <meta name="description" content="間もなく80歳。精密機器メーカーの技術者から中小企業コンサルタント、そしてAIプログラミングへ。awatakeの活動・作品・ブログを紹介します。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="container">
-            <h1 class="site-title"><a href="#">健やかライフ</a></h1>
+    <header class="site-header" id="site-header">
+        <div class="container header-inner">
+            <a href="#" class="brand">
+                <span class="brand-mark">a</span>
+                <span class="brand-text">awatake<span class="brand-sub">since 1946</span></span>
+            </a>
             <nav class="main-nav">
                 <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false">
                     <span class="sr-only">メニューを開閉</span>
@@ -21,164 +25,316 @@
                     <span class="icon-bar"></span>
                 </button>
                 <ul id="primary-navigation" class="nav-list">
-                    <li><a href="#about">私たちについて</a></li>
+                    <li><a href="#story">ストーリー</a></li>
                     <li><a href="#profile">プロフィール</a></li>
-                    <li><a href="#services">サービス</a></li>
+                    <li><a href="#works">作品</a></li>
+                    <li><a href="#community">活動</a></li>
+                    <li><a href="#services">相談できること</a></li>
                     <li><a href="#blog">ブログ</a></li>
-                    <li><a href="#contact">お問い合わせ</a></li>
+                    <li><a href="#contact" class="nav-cta">お問い合わせ</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main>
+        <!-- ヒーロー -->
         <section id="hero" class="hero-section">
-            <div class="hero-content">
-                <h2>豊かなセカンドライフを<br>サポートします</h2>
-                <p>健康、趣味、学び。新しい毎日をここから始めませんか？</p>
-                <a href="#contact" class="btn btn-primary">無料相談はこちら</a>
+            <div class="hero-bg" aria-hidden="true"></div>
+            <div class="container hero-content">
+                <p class="hero-eyebrow">1946年生まれ、新潟県出身 — 東京・八王子で活動中</p>
+                <h1 class="hero-title">
+                    79歳、<br>
+                    <span class="accent">まだ夢中で</span>いられる。
+                </h1>
+                <p class="hero-lead">
+                    精密機器メーカーの技術者から、1,000社の社長と歩んだコンサルタントへ。<br class="pc-only">
+                    そして今、AIを相棒にプログラミングに挑んでいます。<br class="pc-only">
+                    年齢は、始めない理由になりません。
+                </p>
+                <div class="hero-actions">
+                    <a href="#works" class="btn btn-primary">作品を見る</a>
+                    <a href="#community" class="btn btn-ghost">一緒に活動する</a>
+                </div>
+                <ul class="hero-stats">
+                    <li><span class="stat-num" data-count="79">0</span><span class="stat-label">歳・現役</span></li>
+                    <li><span class="stat-num" data-count="1000">0</span><span class="stat-label">社の経営者ネットワーク</span></li>
+                    <li><span class="stat-num" data-count="10">0</span><span class="stat-label">年超の技術相談員経験</span></li>
+                    <li><span class="stat-num" data-count="8">0</span><span class="stat-label">本のWeb作品を公開中</span></li>
+                </ul>
             </div>
+            <a href="#story" class="scroll-cue" aria-label="下へスクロール"><span></span></a>
         </section>
 
-        <section id="about" class="about-section section-padding">
+        <!-- ストーリー -->
+        <section id="story" class="story-section section-padding">
             <div class="container">
-                <h2 class="section-title">私たちについて</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>「健やかライフ」は、シニア世代の皆様が安心して、そして生き生きと毎日を過ごせるよう、多岐にわたるサポートを提供しています。</p>
-                        <p>健康維持のための情報提供から、新しい趣味を見つけるお手伝い、地域コミュニティとの繋がりを深めるイベント企画まで、皆様の「もっとこうしたい」を形にするお手伝いをいたします。</p>
-                        <p>経験豊富なスタッフが、一人ひとりのニーズに寄り添い、最適なプランをご提案。デジタルデバイスの活用支援も行い、情報社会から取り残されることなく、快適な生活を送れるようサポートします。</p>
+                <p class="section-eyebrow">Story</p>
+                <h2 class="section-title">「もう歳だから」と言わない生き方</h2>
+                <div class="story-grid">
+                    <div class="story-text reveal">
+                        <p>私は1946年生まれ。間もなく80歳になります。</p>
+                        <p>某精密機器メーカーで製品開発や商品企画、関連子会社の社長まで、ものづくりの現場を長く歩いてきました。退職後は八王子市や東京都の技術相談員・コーディネーターとして10年以上、東京のものづくり中小企業1,000社近い社長さんたちと一緒に課題を解決してきました。</p>
+                        <p>そして今——AIと対話しながらコードを書く「バイブコーディング」に出会い、ゲームやWebサイトを次々とつくっています。このホームページも、AIと私の共同作品です。</p>
+                        <p class="story-emphasis">新しい道具を面白がる気持ちさえあれば、いくつになっても「つくる側」でいられる。それを自分自身で証明していくのが、いまの私のテーマです。</p>
                     </div>
-                    <div class="about-image">
-                        <img src="https://picsum.photos/id/237/600/400" alt="シニア世代の笑顔">
+                    <div class="story-cards">
+                        <div class="story-card reveal">
+                            <span class="story-card-icon">🏭</span>
+                            <h3>ものづくり一筋</h3>
+                            <p>製品開発・商品企画から子会社経営まで。技術と経営の両方を現場で経験。</p>
+                        </div>
+                        <div class="story-card reveal">
+                            <span class="story-card-icon">🤝</span>
+                            <h3>1,000社と伴走</h3>
+                            <p>技術相談員として10年以上、中小企業の社長さんたちと課題解決に取り組む。</p>
+                        </div>
+                        <div class="story-card reveal">
+                            <span class="story-card-icon">🤖</span>
+                            <h3>79歳でAIに挑戦</h3>
+                            <p>AIとの対話でゲームやサイトを制作。作品はすべてWebで公開中。</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="profile" class="profile-section section-padding bg-light">
+        <!-- プロフィール -->
+        <section id="profile" class="profile-section section-padding bg-dark">
             <div class="container">
-                <h2 class="section-title">私のプロフィール</h2>
+                <p class="section-eyebrow">Profile</p>
+                <h2 class="section-title">プロフィール</h2>
                 <div class="profile-content">
-                    <div class="profile-image">
-                        <img src="images/myphoto.png" alt="あなたのプロフィール画像">
+                    <div class="profile-side reveal">
+                        <div class="profile-photo">
+                            <img src="images/myphoto.png" alt="awatakeのプロフィール写真">
+                        </div>
+                        <h3 class="profile-name">awatake</h3>
+                        <p class="profile-role">ITエンジニア / 中小企業コンサルタント</p>
+                        <ul class="profile-facts">
+                            <li><strong>生まれ</strong>1946年11月・新潟県</li>
+                            <li><strong>拠点</strong>東京都</li>
+                            <li><strong>趣味</strong>散歩、カラオケ、AIプログラミング</li>
+                            <li><strong>専門</strong>企業経営・マーケティング・技術課題</li>
+                        </ul>
                     </div>
-
-
-<div class="profile-text">
-    <h3>[awatake]</h3>
-
-    <p>
-        東京都内、ものづくり中小企業1,000社近い社長さんとのお付き合いがあります。<br>
-        某精密機器メーカーで製品開発、商品企画、関連子会社の社長や色々な分野を経験しました。<br>
-        精密機器メーカー退職後、八王子市や東京都の技術相談員及びコーディネーターとして10年以上現場に密着した仕事をしてきました。<br>
-    </p>
-     <p>   
-        今は個人事業主としてコンサルティング業務をしています。<br>
-        企業経営やマーケティング、技術課題等お気軽にご相談ください。
-     </p>
-
-<div style="height: 50px;"></div> <!-- ★これが確実なスペーサー -->
-
-
-
-
-    <ul>
-        <li><strong>生年月日：</strong> [1946年11月X日]</li>
-        <li><strong>出身地：</strong> [新潟県]</li>
-        <li><strong>趣味：</strong> [散歩、カラオケ]</li>
-        <li><strong>専門分野：</strong> [ITエンジニア、企業向けコンサル]</li>
-    </ul>
-
-    <p>皆様との出会いを楽しみにしております。</p>
-</div>
-
-
-
-
+                    <div class="profile-timeline reveal">
+                        <h3 class="timeline-heading">歩んできた道</h3>
+                        <ol class="timeline">
+                            <li>
+                                <span class="timeline-era">1946</span>
+                                <div><h4>新潟県に生まれる</h4><p>戦後まもない日本で育ち、ものづくりの時代とともに歩む。</p></div>
+                            </li>
+                            <li>
+                                <span class="timeline-era">〜2000年代</span>
+                                <div><h4>精密機器メーカーで技術と経営を経験</h4><p>製品開発、商品企画、関連子会社の社長など、幅広い分野を担当。</p></div>
+                            </li>
+                            <li>
+                                <span class="timeline-era">退職後</span>
+                                <div><h4>八王子市・東京都の技術相談員に</h4><p>コーディネーターとして10年以上、現場に密着。ものづくり中小企業1,000社近い社長さんと信頼関係を築く。</p></div>
+                            </li>
+                            <li>
+                                <span class="timeline-era">現在</span>
+                                <div><h4>個人事業主として活動中</h4><p>企業経営・マーケティング・技術課題のコンサルティングを続けながら、AIプログラミングで作品づくりに熱中。</p></div>
+                            </li>
+                        </ol>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="services" class="services-section section-padding bg-light">
+        <!-- 作品ギャラリー -->
+        <section id="works" class="works-section section-padding">
             <div class="container">
-                <h2 class="section-title">私たちのサービス</h2>
+                <p class="section-eyebrow">Works</p>
+                <h2 class="section-title">AIと一緒につくった作品</h2>
+                <p class="section-lead">すべて実際に遊べます。クリックしてお試しください。</p>
+                <div class="works-grid">
+                    <a class="work-card reveal" href="https://m3-kawasaki.github.io/image-game-files/" target="_blank" rel="noopener">
+                        <div class="work-thumb thumb-1"><span>🔬</span></div>
+                        <div class="work-body">
+                            <h3>画像処理ラボ・クイズ</h3>
+                            <p>画像処理のしくみを遊びながら学べる実験ラボ＆クイズ。</p>
+                            <span class="work-tag">学べるゲーム</span>
+                        </div>
+                    </a>
+                    <a class="work-card reveal" href="https://m3-kawasaki.github.io/party-game/" target="_blank" rel="noopener">
+                        <div class="work-thumb thumb-2"><span>🔐</span></div>
+                        <div class="work-body">
+                            <h3>SAFE CRACKER</h3>
+                            <p>ヒントから金庫の暗証番号を解き明かす推理ゲーム。</p>
+                            <span class="work-tag">推理ゲーム</span>
+                        </div>
+                    </a>
+                    <a class="work-card reveal" href="https://m3-kawasaki.github.io/shinkei/" target="_blank" rel="noopener">
+                        <div class="work-thumb thumb-3"><span>🃏</span></div>
+                        <div class="work-body">
+                            <h3>神経衰弱</h3>
+                            <p>トランプ52枚を使った二人対戦の記憶ゲーム。</p>
+                            <span class="work-tag">対戦ゲーム</span>
+                        </div>
+                    </a>
+                    <a class="work-card reveal" href="https://m3-kawasaki.github.io/typing-game/" target="_blank" rel="noopener">
+                        <div class="work-thumb thumb-4"><span>⌨️</span></div>
+                        <div class="work-body">
+                            <h3>シンプルタイピング</h3>
+                            <p>キーボード練習にぴったりのタイピングゲーム。</p>
+                            <span class="work-tag">練習ツール</span>
+                        </div>
+                    </a>
+                    <a class="work-card reveal" href="https://m3-kawasaki.github.io/timer2/" target="_blank" rel="noopener">
+                        <div class="work-thumb thumb-5"><span>⏱️</span></div>
+                        <div class="work-body">
+                            <h3>タイマー</h3>
+                            <p>シンプルで見やすい、暮らしに役立つタイマー。</p>
+                            <span class="work-tag">便利ツール</span>
+                        </div>
+                    </a>
+                    <a class="work-card reveal" href="https://m3-kawasaki.github.io/blog3/" target="_blank" rel="noopener">
+                        <div class="work-thumb thumb-6"><span>📝</span></div>
+                        <div class="work-body">
+                            <h3>シンプルブログ</h3>
+                            <p>自作のブログシステム。書く場所も自分でつくる。</p>
+                            <span class="work-tag">Webアプリ</span>
+                        </div>
+                    </a>
+                    <a class="work-card reveal" href="https://m3-kawasaki.github.io/gazou-club/" target="_blank" rel="noopener">
+                        <div class="work-thumb thumb-7"><span>📷</span></div>
+                        <div class="work-body">
+                            <h3>画像処理同好会 公式サイト</h3>
+                            <p>仲間と学ぶ画像処理同好会のホームページ。</p>
+                            <span class="work-tag">コミュニティ</span>
+                        </div>
+                    </a>
+                    <a class="work-card reveal" href="https://m3-kawasaki.github.io/image-prosessing/" target="_blank" rel="noopener">
+                        <div class="work-thumb thumb-8"><span>🖥️</span></div>
+                        <div class="work-body">
+                            <h3>シニアテック・ラボ</h3>
+                            <p>画像処理・AI・PCを楽しむシニアのための情報サイト。</p>
+                            <span class="work-tag">コミュニティ</span>
+                        </div>
+                    </a>
+                </div>
+                <p class="works-footnote">ソースコードはすべて <a href="https://github.com/m3-kawasaki" target="_blank" rel="noopener">GitHub（m3-kawasaki）</a> で公開しています。</p>
+            </div>
+        </section>
+
+        <!-- 活動・コミュニティ -->
+        <section id="community" class="community-section section-padding bg-warm">
+            <div class="container">
+                <p class="section-eyebrow">Community</p>
+                <h2 class="section-title">一緒に楽しむ仲間を募集中</h2>
+                <p class="section-lead">「見ているだけ」から「つくる側」へ。仲間がいれば、一歩がずっと軽くなります。</p>
+                <div class="community-grid">
+                    <div class="community-card reveal">
+                        <span class="community-icon">📷</span>
+                        <h3>画像処理同好会</h3>
+                        <p>写真や画像処理をテーマに、例会で作品を持ち寄って学び合う同好会です。デジタル写真の楽しみ方が広がります。</p>
+                        <a href="https://m3-kawasaki.github.io/gazou-club/" target="_blank" rel="noopener" class="btn btn-outline">同好会サイトへ</a>
+                    </div>
+                    <div class="community-card reveal">
+                        <span class="community-icon">🤖</span>
+                        <h3>シニアテック・ラボ</h3>
+                        <p>画像処理・AI・パソコンを面白がるシニアの集まり。AIでのプログラミング体験も、ここから始められます。</p>
+                        <a href="https://m3-kawasaki.github.io/image-prosessing/" target="_blank" rel="noopener" class="btn btn-outline">ラボのサイトへ</a>
+                    </div>
+                    <div class="community-card reveal">
+                        <span class="community-icon">🎤</span>
+                        <h3>散歩とカラオケも</h3>
+                        <p>健康の基本は、歩くことと声を出すこと。肩ひじ張らないお付き合いも大歓迎です。まずは気軽にご連絡ください。</p>
+                        <a href="#contact" class="btn btn-outline">連絡してみる</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 相談できること -->
+        <section id="services" class="services-section section-padding">
+            <div class="container">
+                <p class="section-eyebrow">Consulting</p>
+                <h2 class="section-title">相談できること</h2>
+                <p class="section-lead">個人事業主として、コンサルティング業務を行っています。お気軽にご相談ください。</p>
                 <div class="service-grid">
-                    <div class="service-item">
-                        <img src="https://picsum.photos/id/1015/400/250" alt="健康サポート">
-                        <h3>健康サポート</h3>
-                        <p>専門家による健康相談、運動プログラムの紹介、栄養バランスのアドバイスなど、日々の健康をサポートします。</p>
+                    <div class="service-item reveal">
+                        <span class="service-icon">📈</span>
+                        <h3>企業経営</h3>
+                        <p>子会社社長としての経営経験と、1,000社近い中小企業の現場を見てきた知見をもとに、経営課題の整理と打ち手をご一緒に考えます。</p>
                     </div>
-                    <div class="service-item">
-                        <img src="https://picsum.photos/id/1040/400/250" alt="趣味・学びの支援">
-                        <h3>趣味・学びの支援</h3>
-                        <p>新しい趣味を見つけるワークショップ、生涯学習の機会提供、デジタルスキルアップ講座など、知的好奇心を刺激します。</p>
+                    <div class="service-item reveal">
+                        <span class="service-icon">💡</span>
+                        <h3>マーケティング・商品企画</h3>
+                        <p>精密機器メーカーでの商品企画の経験を活かし、「売れるものづくり」の視点から企画・販路の課題をサポートします。</p>
                     </div>
-                    <div class="service-item">
-                        <img src="https://picsum.photos/id/1084/400/250" alt="コミュニティ活動">
-                        <h3>コミュニティ活動</h3>
-                        <p>地域交流イベント、ボランティア活動の紹介、仲間作りを支援する交流会など、社会との繋がりを深めます。</p>
+                    <div class="service-item reveal">
+                        <span class="service-icon">🔧</span>
+                        <h3>技術課題・デジタル活用</h3>
+                        <p>技術相談員として10年以上の実績。現場の技術課題からAI・デジタル活用の第一歩まで、わかる言葉でお手伝いします。</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="blog" class="blog-section section-padding">
+        <!-- ブログ -->
+        <section id="blog" class="blog-section section-padding bg-warm">
             <div class="container">
+                <p class="section-eyebrow">Blog</p>
                 <h2 class="section-title">最新情報・ブログ</h2>
                 <div class="blog-grid">
-                    <article class="blog-post">
-                        <img src="https://picsum.photos/id/1018/400/250" alt="ブログ記事1">
-                        <h3><a href="healthy-life.html">健康寿命を延ばす秘訣</a></h3>
-                        <p class="post-meta">2024年7月1日</p>
-                        <p>日々の生活で実践できる、健康寿命を延ばすための簡単なヒントをご紹介します。</p>
+                    <article class="blog-post reveal">
+                        <a href="healthy-life.html" class="blog-thumb blog-thumb-1"><span>🚶</span></a>
+                        <div class="blog-body">
+                            <p class="post-meta">健康</p>
+                            <h3><a href="healthy-life.html">健康寿命を延ばす秘訣</a></h3>
+                            <p>日々の生活で実践できる、健康寿命を延ばすための簡単なヒントをご紹介します。</p>
+                        </div>
                     </article>
-                    <article class="blog-post">
-                        <img src="https://picsum.photos/id/1019/400/250" alt="ブログ記事2">
-                        <h3><a href="digital-device.html">デジタルデバイス活用術</a></h3>
-                        <p class="post-meta">2024年6月25日</p>
-                        <p>スマートフォンやタブレットをもっと便利に使うための、初心者向けガイドです。</p>
+                    <article class="blog-post reveal">
+                        <a href="digital-device.html" class="blog-thumb blog-thumb-2"><span>📱</span></a>
+                        <div class="blog-body">
+                            <p class="post-meta">デジタル</p>
+                            <h3><a href="digital-device.html">デジタルデバイス活用術</a></h3>
+                            <p>スマートフォンやタブレットをもっと便利に使うための、初心者向けガイドです。</p>
+                        </div>
                     </article>
-                    <article class="blog-post">
-                        <img src="https://picsum.photos/id/1020/400/250" alt="ブログ記事3">
-                        <h3><a href="Local-Community.html">地域コミュニティに参加しよう</a></h3>
-                        <p class="post-meta">2024年6月18日</p>
-                        <p>新しい仲間と出会い、地域活動に参加するメリットについて解説します。</p>
+                    <article class="blog-post reveal">
+                        <a href="Local-Community.html" class="blog-thumb blog-thumb-3"><span>🏘️</span></a>
+                        <div class="blog-body">
+                            <p class="post-meta">コミュニティ</p>
+                            <h3><a href="Local-Community.html">地域コミュニティに参加しよう</a></h3>
+                            <p>新しい仲間と出会い、地域活動に参加するメリットについて解説します。</p>
+                        </div>
                     </article>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="contact-section section-padding bg-light">
-            <div class="container">
+        <!-- お問い合わせ -->
+        <section id="contact" class="contact-section section-padding bg-dark">
+            <div class="container contact-inner">
+                <p class="section-eyebrow">Contact</p>
                 <h2 class="section-title">お問い合わせ</h2>
-                <p class="contact-intro">ご質問やご相談がございましたら、お気軽にお問い合わせください。</p>
-                <form class="contact-form">
-                    <div class="form-group">
-                        <label for="name">お名前</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">メールアドレス</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">お問い合わせ内容</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">送信</button>
-                </form>
+                <p class="contact-intro">
+                    経営や技術のご相談、同好会への参加、「私もAIで何かつくってみたい」——<br class="pc-only">
+                    どんなきっかけでも歓迎です。メールでお気軽にどうぞ。
+                </p>
+                <div class="contact-actions">
+                    <a href="mailto:m3.kawasaki@gmail.com?subject=%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E8%A6%8B%E3%81%A6" class="btn btn-primary btn-large">📧 メールを送る</a>
+                    <a href="https://github.com/m3-kawasaki" target="_blank" rel="noopener" class="btn btn-ghost btn-large">GitHubを見る</a>
+                </div>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2024 健やかライフ. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">プライバシーポリシー</a>
-                <a href="#">サイトマップ</a>
-            </div>
+        <div class="container footer-inner">
+            <p class="footer-brand">awatake <span>— 79歳、AIとつくる毎日。</span></p>
+            <nav class="footer-links">
+                <a href="#story">ストーリー</a>
+                <a href="#works">作品</a>
+                <a href="#community">活動</a>
+                <a href="#contact">お問い合わせ</a>
+            </nav>
+            <p class="footer-copy">&copy; 2026 awatake. このサイトはAIとの共同作業（バイブコーディング）でつくりました。</p>
         </div>
     </footer>
 

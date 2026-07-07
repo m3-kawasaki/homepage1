@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>地域コミュニティに参加しよう - 健やかライフ</title>
+    <title>地域コミュニティに参加しよう | awatake</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="container">
-            <h1 class="site-title"><a href="index.html">健やかライフ</a></h1>
+    <header class="site-header" id="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand">
+                <span class="brand-mark">a</span>
+                <span class="brand-text">awatake<span class="brand-sub">since 1946</span></span>
+            </a>
             <nav class="main-nav">
                 <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false">
                     <span class="sr-only">メニューを開閉</span>
@@ -21,11 +24,12 @@
                     <span class="icon-bar"></span>
                 </button>
                 <ul id="primary-navigation" class="nav-list">
-                    <li><a href="index.html#about">私たちについて</a></li>
+                    <li><a href="index.html#story">ストーリー</a></li>
                     <li><a href="index.html#profile">プロフィール</a></li>
-                    <li><a href="index.html#services">サービス</a></li>
+                    <li><a href="index.html#works">作品</a></li>
+                    <li><a href="index.html#community">活動</a></li>
                     <li><a href="index.html#blog">ブログ</a></li>
-                    <li><a href="index.html#contact">お問い合わせ</a></li>
+                    <li><a href="index.html#contact" class="nav-cta">お問い合わせ</a></li>
                 </ul>
             </nav>
         </div>
@@ -34,11 +38,12 @@
     <main>
         <section class="article-section section-padding">
             <div class="container">
+                <p class="section-eyebrow">Blog — コミュニティ</p>
                 <h2 class="section-title">地域コミュニティに参加しよう</h2>
                 <article class="article-content">
                     <h3>新しい仲間との出会い</h3>
                     <p>地域のコミュニティ活動に参加することは、新しい友人や知人を作る絶好の機会です。共通の趣味を持つ仲間と出会ったり、これまで知らなかった地域の人々と交流したりすることで、人間関係が豊かになり、日々の生活に新たな彩りが加わります。地域のイベントやお祭りに顔を出すだけでも、新しいつながりが生まれることがあります。</p>
-                    
+
                     <h3>趣味や学びの場を広げる</h3>
                     <p>公民館や地域のサークルでは、様々な講座やワークショップが開催されています。手芸、絵画、ダンス、語学など、興味のある分野に挑戦することで、新しいスキルを身につけ、趣味の世界を広げることができます。また、地域の歴史や文化を学ぶ講座に参加すれば、自分が住む街への愛着がより一層深まるでしょう。</p>
 
@@ -46,19 +51,22 @@
                     <p>ボランティア活動や地域の清掃活動などに参加することは、社会に貢献する喜びを感じられるだけでなく、心身の健康にも良い影響を与えます。体を動かし、誰かの役に立っているという実感は、自己肯定感を高め、生きがいにもつながります。地域の一員として、積極的に活動に参加してみませんか。</p>
                 </article>
                 <div class="back-to-top">
-                    <a href="index.html#blog" class="btn">ブログ一覧へ戻る</a>
+                    <a href="index.html#blog" class="btn btn-outline">← ブログ一覧へ戻る</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2024 健やかライフ. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">プライバシーポリシー</a>
-                <a href="#">サイトマップ</a>
-            </div>
+        <div class="container footer-inner">
+            <p class="footer-brand">awatake <span>— 79歳、AIとつくる毎日。</span></p>
+            <nav class="footer-links">
+                <a href="index.html#story">ストーリー</a>
+                <a href="index.html#works">作品</a>
+                <a href="index.html#community">活動</a>
+                <a href="index.html#contact">お問い合わせ</a>
+            </nav>
+            <p class="footer-copy">&copy; 2026 awatake. このサイトはAIとの共同作業（バイブコーディング）でつくりました。</p>
         </div>
     </footer>
 

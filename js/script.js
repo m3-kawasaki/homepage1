@@ -1,34 +1,103 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
+// awatake ホームページ — メニュー・スクロール演出・数字カウント
 
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
+document.addEventListener('DOMContentLoaded', function () {
 
-    // Mobile menu toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navList = document.querySelector('.nav-list');
+    // ----- モバイルメニューの開閉 -----
+    var menuToggle = document.querySelector('.menu-toggle');
+    var navList = document.querySelector('.nav-list');
 
     if (menuToggle && navList) {
-        menuToggle.addEventListener('click', () => {
-            const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-            menuToggle.setAttribute('aria-expanded', !expanded);
+        menuToggle.addEventListener('click', function () {
+            var expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!expanded));
             navList.classList.toggle('active');
         });
 
-        // Close menu when a navigation link is clicked (for mobile)
-        navList.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navList.classList.contains('active')) {
-                    menuToggle.setAttribute('aria-expanded', 'false');
-                    navList.classList.remove('active');
+        // メニュー項目を選んだら閉じる
+        navList.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                menuToggle.setAttribute('aria-expanded', 'false');
+                navList.classList.remove('active');
+            });
+        });
+    }
+
+    // ----- スクロールでヘッダーに影をつける -----
+    var header = document.getElementById('site-header') || document.querySelector('.site-header');
+    if (header) {
+        var onScroll = function () {
+            header.classList.toggle('scrolled', window.scrollY > 10);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    }
+
+    // ----- スクロールに合わせてふわっと表示 -----
+    var reveals = document.querySelectorAll('.reveal');
+    if (reveals.length > 0 && 'IntersectionObserver' in window) {
+        var revealObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
                 }
             });
+        }, { threshold: 0.15 });
+
+        reveals.forEach(function (el, i) {
+            el.style.transitionDelay = (i % 3) * 0.12 + 's';
+            revealObserver.observe(el);
+        });
+    } else {
+        reveals.forEach(function (el) { el.classList.add('visible'); });
+    }
+
+    // ----- ヒーローの数字カウントアップ -----
+    var counters = document.querySelectorAll('.stat-num[data-count]');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function formatNum(value, target) {
+        return target >= 1000 ? value.toLocaleString('ja-JP') : String(value);
+    }
+
+    function animateCounter(el) {
+        var target = parseInt(el.getAttribute('data-count'), 10);
+        if (isNaN(target)) { return; }
+        if (reduceMotion) {
+            el.textContent = formatNum(target, target);
+            return;
+        }
+        var duration = 1600;
+        var start = null;
+        function step(timestamp) {
+            if (!start) { start = timestamp; }
+            var progress = Math.min((timestamp - start) / duration, 1);
+            // ゆっくり止まるイージング
+            var eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = formatNum(Math.round(target * eased), target);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        }
+        window.requestAnimationFrame(step);
+    }
+
+    if (counters.length > 0 && 'IntersectionObserver' in window) {
+        var counterObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        counters.forEach(function (el) { counterObserver.observe(el); });
+    } else {
+        counters.forEach(function (el) {
+            var target = parseInt(el.getAttribute('data-count'), 10);
+            if (!isNaN(target)) {
+                el.textContent = formatNum(target, target);
+            }
         });
     }
 });

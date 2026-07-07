@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>健康寿命を延ばす秘訣 - 健やかライフ</title>
+    <title>健康寿命を延ばす秘訣 | awatake</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="container">
-            <h1 class="site-title"><a href="index.html">健やかライフ</a></h1>
+    <header class="site-header" id="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand">
+                <span class="brand-mark">a</span>
+                <span class="brand-text">awatake<span class="brand-sub">since 1946</span></span>
+            </a>
             <nav class="main-nav">
                 <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false">
                     <span class="sr-only">メニューを開閉</span>
@@ -21,11 +24,12 @@
                     <span class="icon-bar"></span>
                 </button>
                 <ul id="primary-navigation" class="nav-list">
-                    <li><a href="index.html#about">私たちについて</a></li>
+                    <li><a href="index.html#story">ストーリー</a></li>
                     <li><a href="index.html#profile">プロフィール</a></li>
-                    <li><a href="index.html#services">サービス</a></li>
+                    <li><a href="index.html#works">作品</a></li>
+                    <li><a href="index.html#community">活動</a></li>
                     <li><a href="index.html#blog">ブログ</a></li>
-                    <li><a href="index.html#contact">お問い合わせ</a></li>
+                    <li><a href="index.html#contact" class="nav-cta">お問い合わせ</a></li>
                 </ul>
             </nav>
         </div>
@@ -34,11 +38,12 @@
     <main>
         <section class="article-section section-padding">
             <div class="container">
+                <p class="section-eyebrow">Blog — 健康</p>
                 <h2 class="section-title">健康寿命を延ばす秘訣</h2>
                 <article class="article-content">
                     <h3>適度な運動を習慣に</h3>
                     <p>健康寿命を延ばすためには、毎日の適度な運動が欠かせません。ウォーキングやストレッチなど、無理のない範囲で体を動かす習慣をつけましょう。特に、朝の散歩は心身をリフレッシュさせ、一日の活力を生み出します。友人や家族と一緒に行うことで、楽しみながら続けることができます。</p>
-                    
+
                     <h3>バランスの取れた食事</h3>
                     <p>私たちの体は、食べたもので作られています。主食、主菜、副菜をバランス良く摂り、特に野菜や果物、魚を積極的に食事に取り入れましょう。塩分や糖分の摂りすぎに注意し、腹八分目を心がけることも大切です。季節の食材を味わいながら、豊かな食生活を楽しみましょう。</p>
 
@@ -46,19 +51,22 @@
                     <p>趣味のサークルに参加したり、ボランティア活動を行ったりと、積極的に社会と関わることは、心の健康を保つ上で非常に重要です。人との交流は、新たな発見や喜びをもたらし、生活に張りを与えてくれます。孤立せず、多くの人とつながりを持つことが、生き生きとした毎日を送る秘訣です。</p>
                 </article>
                 <div class="back-to-top">
-                    <a href="index.html#blog" class="btn">ブログ一覧へ戻る</a>
+                    <a href="index.html#blog" class="btn btn-outline">← ブログ一覧へ戻る</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2024 健やかライフ. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">プライバシーポリシー</a>
-                <a href="#">サイトマップ</a>
-            </div>
+        <div class="container footer-inner">
+            <p class="footer-brand">awatake <span>— 79歳、AIとつくる毎日。</span></p>
+            <nav class="footer-links">
+                <a href="index.html#story">ストーリー</a>
+                <a href="index.html#works">作品</a>
+                <a href="index.html#community">活動</a>
+                <a href="index.html#contact">お問い合わせ</a>
+            </nav>
+            <p class="footer-copy">&copy; 2026 awatake. このサイトはAIとの共同作業（バイブコーディング）でつくりました。</p>
         </div>
     </footer>
 
