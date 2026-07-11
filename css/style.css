@@ -580,6 +580,128 @@ h1, h2, h3, h4 {
     font-size: 0.95em;
 }
 
+/* ---------- 図解プロフィール ---------- */
+.zukai-banner {
+    margin-top: 64px;
+    text-align: center;
+}
+
+.zukai-lead {
+    font-family: var(--font-serif);
+    font-size: 1.15em;
+    color: var(--text-on-dark);
+    margin: 0 0 20px;
+}
+
+.zukai-link {
+    display: block;
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 14px 44px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.zukai-link:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 56px rgba(0, 0, 0, 0.55);
+    text-decoration: none;
+}
+
+.zukai-link img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.4s ease;
+}
+.zukai-link:hover img { transform: scale(1.02); }
+
+.zukai-overlay {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 48px 20px 18px;
+    background: linear-gradient(to top, rgba(10, 16, 32, 0.88), transparent);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.zukai-title {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.25em;
+    color: var(--white);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.zukai-hint {
+    display: inline-block;
+    font-size: 0.9em;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--accent);
+    border-radius: 999px;
+    padding: 7px 20px;
+    box-shadow: 0 6px 18px rgba(217, 72, 28, 0.45);
+    transition: transform 0.3s ease;
+}
+.zukai-link:hover .zukai-hint { transform: scale(1.08); }
+
+/* ---------- ライトボックス（拡大表示） ---------- */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(5, 8, 16, 0.92);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    cursor: zoom-out;
+}
+.lightbox[hidden] { display: none; }
+
+.lightbox img {
+    max-width: min(96vw, 1400px);
+    max-height: 84vh;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    cursor: default;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    width: 56px; height: 56px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white);
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+.lightbox-close:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: rotate(90deg);
+}
+
+.lightbox-note {
+    margin: 18px 0 0;
+    color: var(--text-soft-on-dark);
+    font-size: 0.9em;
+    text-align: center;
+}
+
 /* ---------- 作品ギャラリー ---------- */
 .works-grid {
     display: grid;

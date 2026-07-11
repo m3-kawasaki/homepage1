@@ -82,6 +82,42 @@ document.addEventListener('DOMContentLoaded', function () {
         window.requestAnimationFrame(step);
     }
 
+    // ----- 図解プロフィールのライトボックス（拡大表示） -----
+    var zukaiOpen = document.getElementById('zukai-open');
+    var zukaiLightbox = document.getElementById('zukai-lightbox');
+    var zukaiClose = document.getElementById('zukai-close');
+
+    if (zukaiOpen && zukaiLightbox && zukaiClose) {
+        var openLightbox = function (e) {
+            e.preventDefault();
+            zukaiLightbox.hidden = false;
+            document.body.style.overflow = 'hidden';
+            zukaiClose.focus();
+        };
+        var closeLightbox = function () {
+            zukaiLightbox.hidden = true;
+            document.body.style.overflow = '';
+            zukaiOpen.focus();
+        };
+
+        zukaiOpen.addEventListener('click', openLightbox);
+        zukaiClose.addEventListener('click', closeLightbox);
+
+        // 画像の外側（背景）をクリックしたら閉じる
+        zukaiLightbox.addEventListener('click', function (e) {
+            if (e.target === zukaiLightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Escキーでも閉じる
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && !zukaiLightbox.hidden) {
+                closeLightbox();
+            }
+        });
+    }
+
     if (counters.length > 0 && 'IntersectionObserver' in window) {
         var counterObserver = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
