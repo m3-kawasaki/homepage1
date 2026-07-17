@@ -650,6 +650,103 @@ h1, h2, h3, h4 {
 }
 .zukai-link:hover .zukai-hint { transform: scale(1.08); }
 
+/* ---------- 講演動画バナー ---------- */
+.video-banner {
+    display: flex;
+    align-items: stretch;
+    max-width: 880px;
+    margin: 40px auto 0;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 14px 44px rgba(0, 0, 0, 0.45);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.video-banner:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 56px rgba(0, 0, 0, 0.55);
+    text-decoration: none;
+}
+
+.video-thumb {
+    position: relative;
+    flex: 0 0 44%;
+    min-height: 220px;
+    overflow: hidden;
+}
+.video-thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.video-banner:hover .video-thumb img { transform: scale(1.04); }
+
+.video-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(217, 72, 28, 0.92);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    padding-left: 5px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+.video-banner:hover .video-play { transform: translate(-50%, -50%) scale(1.12); }
+
+.video-body {
+    flex: 1;
+    padding: 30px 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.video-eyebrow {
+    display: inline-block;
+    font-size: 0.8em;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    border: 1px solid rgba(201, 162, 39, 0.5);
+    border-radius: 999px;
+    padding: 2px 14px;
+    margin: 0 0 12px;
+}
+
+.video-body h3 {
+    color: var(--white);
+    font-size: 1.35em;
+    margin-bottom: 10px;
+}
+
+.video-body > p:not(.video-eyebrow) {
+    color: var(--text-soft-on-dark);
+    font-size: 0.95em;
+    margin: 0 0 18px;
+}
+
+.video-cta {
+    background: linear-gradient(135deg, var(--accent), #b53a12);
+    color: var(--white);
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 10px 26px;
+    box-shadow: 0 8px 24px rgba(217, 72, 28, 0.35);
+    white-space: nowrap;
+}
+
 /* ---------- ライトボックス（拡大表示） ---------- */
 .lightbox {
     position: fixed;
@@ -1067,6 +1164,18 @@ h1, h2, h3, h4 {
         text-align: center;
         padding: 32px 24px;
         gap: 18px;
+    }
+
+    .video-banner { flex-direction: column; }
+    .video-thumb {
+        flex: none;
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+    }
+    .video-body {
+        padding: 26px 24px 30px;
+        align-items: center;
+        text-align: center;
     }
 }
 
