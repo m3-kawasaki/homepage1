@@ -877,6 +877,62 @@ h1, h2, h3, h4 {
 .blog-body h3 a:hover { color: var(--accent); text-decoration: none; }
 .blog-body p { font-size: 0.95em; color: var(--text-soft); margin: 0; }
 
+.blog-banner {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-top: 48px;
+    padding: 34px 40px;
+    background: linear-gradient(135deg, var(--ink-deep), #1a2c56);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.blog-banner:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    text-decoration: none;
+}
+
+.blog-banner-icon { font-size: 3.2em; line-height: 1; }
+
+.blog-banner-body { flex: 1; }
+
+.blog-banner-eyebrow {
+    display: inline-block;
+    font-size: 0.8em;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    border: 1px solid rgba(201, 162, 39, 0.5);
+    border-radius: 999px;
+    padding: 2px 14px;
+    margin: 0 0 10px;
+}
+
+.blog-banner h3 {
+    color: var(--white);
+    font-size: 1.5em;
+    margin-bottom: 8px;
+}
+
+.blog-banner-body > p:last-child {
+    color: var(--text-soft-on-dark);
+    font-size: 0.95em;
+    margin: 0;
+}
+
+.blog-banner-cta {
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--accent), #b53a12);
+    color: var(--white);
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 14px 32px;
+    box-shadow: 0 8px 24px rgba(217, 72, 28, 0.35);
+    white-space: nowrap;
+}
+
 /* ---------- 記事ページ ---------- */
 .article-section { padding-top: 160px; }
 
@@ -1005,6 +1061,13 @@ h1, h2, h3, h4 {
 
     .article-content { padding: 40px 28px; }
     .article-section { padding-top: 120px; }
+
+    .blog-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 32px 24px;
+        gap: 18px;
+    }
 }
 
 @media (max-width: 480px) {
