@@ -748,6 +748,7 @@ h1, h2, h3, h4 {
 .thumb-7 { background: linear-gradient(135deg, #46121f, #8c2842); }
 .thumb-9 { background: linear-gradient(135deg, #0f3d3d, #2a7a6f); }
 .thumb-10 { background: linear-gradient(135deg, #2f4d1c, #5f8a3a); }
+.thumb-11 { background: linear-gradient(135deg, #274d70, #6db3e8); }
 
 .work-body {
     padding: 22px 24px 26px;
