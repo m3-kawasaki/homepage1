@@ -745,7 +745,6 @@ h1, h2, h3, h4 {
 .thumb-4 { background: linear-gradient(135deg, #33254d, #5c4696); }
 .thumb-5 { background: linear-gradient(135deg, #123a44, #237282); }
 .thumb-6 { background: linear-gradient(135deg, #43301b, #8a6a33); }
-.thumb-7 { background: linear-gradient(135deg, #46121f, #8c2842); }
 .thumb-9 { background: linear-gradient(135deg, #0f3d3d, #2a7a6f); }
 .thumb-10 { background: linear-gradient(135deg, #2f4d1c, #5f8a3a); }
 .thumb-11 { background: linear-gradient(135deg, #274d70, #6db3e8); }
@@ -807,6 +806,62 @@ h1, h2, h3, h4 {
 .community-card h3 { font-size: 1.35em; }
 .community-card p { color: var(--text-soft); font-size: 0.97em; flex: 1; margin-bottom: 24px; }
 .community-card .btn { align-self: center; }
+
+/* 画像処理同好会の看板カード */
+.community-club { padding: 0; overflow: hidden; }
+.club-banner {
+    position: relative;
+    background: linear-gradient(135deg, #46121f, #8c2842 60%, #b0405e);
+    padding: 34px 24px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+/* フィルムのパーフォレーション風の飾り */
+.club-banner::before, .club-banner::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 8px;
+    background: repeating-linear-gradient(90deg,
+        rgba(255, 255, 255, 0.55) 0 10px, transparent 10px 22px);
+    opacity: 0.45;
+}
+.club-banner::before { top: 8px; }
+.club-banner::after { bottom: 8px; }
+.club-banner-icon {
+    font-size: 2.4em;
+    background: rgba(255, 255, 255, 0.92);
+    width: 78px; height: 78px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+.club-banner-title {
+    color: #fff;
+    font-size: 1.35em;
+    font-weight: 700;
+    font-family: var(--font-serif, serif);
+    letter-spacing: 2px;
+    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.35);
+}
+.club-banner-sub {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.72em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+.club-body {
+    padding: 26px 32px 34px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.club-body p { color: var(--text-soft); font-size: 0.97em; flex: 1; margin-bottom: 24px; }
+.club-body .btn { align-self: center; }
 
 /* ---------- 相談できること ---------- */
 .service-grid {
