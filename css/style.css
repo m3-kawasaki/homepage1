@@ -503,6 +503,8 @@ h1, h2, h3, h4 {
     margin: 0 0 24px;
     font-size: 0.98em;
 }
+/* 肩書きの途中で1文字だけ折り返さないよう、区切りの「/」でのみ改行させる */
+.profile-role span { display: inline-block; }
 
 .profile-facts {
     list-style: none;
