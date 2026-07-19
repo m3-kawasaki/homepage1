@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>くらしの便利ツール | awatake</title>
+<meta name="description" content="和暦・西暦・年齢の早わかり、でか文字ボード、割り勘・消費税計算。日々の「困りごと」をその場で解決する、ブラウザだけで動く便利ツールです。">
+<style>
+  :root {
+    --bg: #faf6ef;
+    --card: #ffffff;
+    --ink: #2b2a26;
+    --sub: #6b675e;
+    --accent: #1f6f54;
+    --accent-dark: #17553f;
+    --accent-soft: #e3f0ea;
+    --line: #e5ded2;
+    --warn: #b0492f;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 16px 64px; }
+
+  header.top {
+    text-align: center;
+    padding: 28px 16px 8px;
+  }
+  .top-eyebrow { color: var(--accent); font-weight: 700; letter-spacing: .15em; font-size: 13px; }
+  h1 { font-size: clamp(26px, 6vw, 36px); line-height: 1.3; margin: 6px 0 4px; }
+  .top-lead { color: var(--sub); font-size: 15px; }
+  .today-banner {
+    display: inline-block;
+    margin-top: 12px;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  /* タブ */
+  .tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 22px 0 18px;
+  }
+  .tab-btn {
+    appearance: none;
+    border: 2px solid var(--line);
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 12px 4px 10px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--sub);
+    cursor: pointer;
+    line-height: 1.35;
+  }
+  .tab-btn .tab-icon { display: block; font-size: 24px; margin-bottom: 2px; }
+  .tab-btn[aria-selected="true"] {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #fff;
+  }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 18px;
+    margin-bottom: 16px;
+  }
+  .card h2 { font-size: 20px; margin-bottom: 4px; }
+  .card .hint { color: var(--sub); font-size: 14px; margin-bottom: 14px; }
+
+  label.fld { display: block; font-weight: 700; font-size: 15px; margin: 12px 0 4px; }
+  select, input[type="number"], input[type="text"], textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 20px;
+    padding: 12px;
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--ink);
+  }
+  select:focus, input:focus, textarea:focus { outline: 3px solid var(--accent-soft); border-color: var(--accent); }
+  .row { display: flex; gap: 10px; }
+  .row > div { flex: 1; }
+
+  .btn {
+    appearance: none;
+    border: none;
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 15px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    margin-top: 18px;
+  }
+  .btn:active { background: var(--accent-dark); }
+  .btn.secondary {
+    background: #fff;
+    color: var(--accent-dark);
+    border: 2px solid var(--accent);
+  }
+
+  .result {
+    margin-top: 18px;
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    display: none;
+  }
+  .result.show { display: block; }
+  .result .big { font-size: clamp(24px, 6vw, 32px); font-weight: 800; color: var(--accent-dark); line-height: 1.4; }
+  .result .sub-line { font-size: 16px; margin-top: 6px; }
+  .result.error { background: #fbe9e3; }
+  .result.error .big { color: var(--warn); font-size: 18px; }
+
+  .quick-table { width: 100%; border-collapse: collapse; font-size: 15px; margin-top: 8px; }
+  .quick-table th, .quick-table td { border: 1px solid var(--line); padding: 8px 6px; text-align: center; }
+  .quick-table th { background: var(--bg); }
+
+  /* でか文字 */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .chip {
+    appearance: none;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    border: 2px solid var(--line);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
+    padding: 8px 14px;
+    cursor: pointer;
+  }
+  .chip:active { border-color: var(--accent); color: var(--accent-dark); }
+
+  #board-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: #111;
+    color: #fff;
+    display: none;
+    cursor: pointer;
+  }
+  #board-overlay.show { display: flex; align-items: center; justify-content: center; }
+  #board-overlay.invert { background: #fff; color: #111; }
+  #board-text {
+    font-weight: 800;
+    text-align: center;
+    padding: 4vmin;
+    width: 100%;
+    line-height: 1.25;
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+  #board-close-hint {
+    position: fixed;
+    bottom: 12px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 14px;
+    opacity: .55;
+  }
+
+  /* ラジオ風の大きな選択肢 */
+  .seg { display: flex; gap: 8px; margin-top: 4px; }
+  .seg label {
+    flex: 1;
+    text-align: center;
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 4px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    background: #fff;
+    color: var(--sub);
+  }
+  .seg input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .seg input:checked + span { color: inherit; }
+  .seg label:has(input:checked) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+  }
+
+  footer.bottom {
+    text-align: center;
+    color: var(--sub);
+    font-size: 14px;
+    padding: 24px 16px 40px;
+  }
+  footer.bottom a { color: var(--accent-dark); }
+
+  @media (max-width: 420px) {
+    body { font-size: 17px; }
+    .card { padding: 16px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <p class="top-eyebrow">KURASHI TOOLS</p>
+  <h1>くらしの便利ツール</h1>
+  <p class="top-lead">日々の「困りごと」を、その場でパッと解決。</p>
+  <p class="today-banner" id="today-banner">今日の日付を確認中…</p>
+</header>
+
+<div class="wrap">
+
+  <div class="tabs" role="tablist" aria-label="ツールの切り替え">
+    <button class="tab-btn" role="tab" id="tab-nenrei" aria-selected="true" aria-controls="panel-nenrei">
+      <span class="tab-icon">📅</span>年号・年齢<br>早わかり
+    </button>
+    <button class="tab-btn" role="tab" id="tab-dekamoji" aria-selected="false" aria-controls="panel-dekamoji">
+      <span class="tab-icon">🔤</span>でか文字<br>ボード
+    </button>
+    <button class="tab-btn" role="tab" id="tab-okane" aria-selected="false" aria-controls="panel-okane">
+      <span class="tab-icon">💴</span>お金の<br>計算
+    </button>
+  </div>
+
+  <!-- ===== ツール1: 年号・年齢 ===== -->
+  <section class="panel active" id="panel-nenrei" role="tabpanel" aria-labelledby="tab-nenrei">
+    <div class="card">
+      <h2>生年月日から 年齢・年号をしらべる</h2>
+      <p class="hint">書類の記入で迷いがちな「西暦・和暦・満年齢」をまとめて表示します。</p>
+
+      <label class="fld" for="era-select">生まれた年の年号</label>
+      <div class="row">
+        <div style="flex: 1.2;">
+          <select id="era-select">
+            <option value="西暦">西暦</option>
+            <option value="令和">令和</option>
+            <option value="平成">平成</option>
+            <option value="昭和" selected>昭和</option>
+            <option value="大正">大正</option>
+            <option value="明治">明治</option>
+          </select>
+        </div>
+        <div>
+          <input type="number" id="birth-year" inputmode="numeric" min="1" max="2100" placeholder="年" aria-label="年">
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 12px;">
+        <div>
+          <label class="fld" for="birth-month" style="margin-top:0;">月</label>
+          <select id="birth-month"></select>
+        </div>
+        <div>
+          <label class="fld" for="birth-day" style="margin-top:0;">日</label>
+          <select id="birth-day"></select>
+        </div>
+      </div>
+
+      <button class="btn" id="calc-age-btn">計算する</button>
+
+      <div class="result" id="age-result" aria-live="polite"></div>
+    </div>
+
+    <div class="card">
+      <h2>年号の早見表</h2>
+      <p class="hint">「令和◯年は西暦何年？」もここで確認できます。</p>
+      <table class="quick-table">
+        <tr><th>年号</th><th>西暦への直し方</th><th>例</th></tr>
+        <tr><td>令和</td><td>令和の年 ＋ 2018</td><td id="ex-reiwa"></td></tr>
+        <tr><td>平成</td><td>平成の年 ＋ 1988</td><td>平成10年 → 1998年</td></tr>
+        <tr><td>昭和</td><td>昭和の年 ＋ 1925</td><td>昭和21年 → 1946年</td></tr>
+        <tr><td>大正</td><td>大正の年 ＋ 1911</td><td>大正10年 → 1921年</td></tr>
+        <tr><td>明治</td><td>明治の年 ＋ 1867</td><td>明治40年 → 1907年</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== ツール2: でか文字ボード ===== -->
+  <section class="panel" id="panel-dekamoji" role="tabpanel" aria-labelledby="tab-dekamoji">
+    <div class="card">
+      <h2>でか文字ボード</h2>
+      <p class="hint">伝えたい言葉を、画面いっぱいの大きな文字で表示します。騒がしい場所や、声が届きにくいときに。</p>
+
+      <label class="fld" for="board-input">伝えたい言葉</label>
+      <textarea id="board-input" rows="3" placeholder="例：ゆっくり話してください"></textarea>
+
+      <p class="hint" style="margin: 12px 0 0;">よく使う言葉（押すと入力されます）</p>
+      <div class="chips" id="preset-chips">
+        <button class="chip">ありがとう</button>
+        <button class="chip">ゆっくり話してください</button>
+        <button class="chip">もう一度お願いします</button>
+        <button class="chip">大丈夫です</button>
+        <button class="chip">水をください</button>
+        <button class="chip">トイレはどこですか</button>
+        <button class="chip">助けてください</button>
+      </div>
+
+      <label class="fld" style="margin-top:16px;">文字の色</label>
+      <div class="seg" id="board-color-seg">
+        <label><input type="radio" name="board-color" value="normal" checked><span>黒地に白文字</span></label>
+        <label><input type="radio" name="board-color" value="invert"><span>白地に黒文字</span></label>
+      </div>
+
+      <button class="btn" id="show-board-btn">大きく表示する</button>
+    </div>
+  </section>
+
+  <!-- ===== ツール3: お金の計算 ===== -->
+  <section class="panel" id="panel-okane" role="tabpanel" aria-labelledby="tab-okane">
+    <div class="card">
+      <h2>割り勘の計算</h2>
+      <p class="hint">会計金額と人数を入れると、一人分の金額が出ます。</p>
+
+      <label class="fld" for="warikan-total">会計金額（円）</label>
+      <input type="number" id="warikan-total" inputmode="numeric" min="1" placeholder="例：12800">
+
+      <label class="fld" for="warikan-people">人数（人）</label>
+      <input type="number" id="warikan-people" inputmode="numeric" min="1" placeholder="例：5">
+
+      <label class="fld">端数のあつかい</label>
+      <div class="seg">
+        <label><input type="radio" name="warikan-unit" value="100" checked><span>100円単位</span></label>
+        <label><input type="radio" name="warikan-unit" value="10"><span>10円単位</span></label>
+        <label><input type="radio" name="warikan-unit" value="1"><span>1円単位</span></label>
+      </div>
+
+      <button class="btn" id="warikan-btn">割り勘を計算する</button>
+      <div class="result" id="warikan-result" aria-live="polite"></div>
+    </div>
+
+    <div class="card">
+      <h2>消費税の計算</h2>
+      <p class="hint">「税込でいくら？」「本体価格はいくら？」がすぐ分かります。</p>
+
+      <label class="fld" for="tax-amount">金額（円）</label>
+      <input type="number" id="tax-amount" inputmode="numeric" min="1" placeholder="例：1980">
+
+      <label class="fld">計算の向き</label>
+      <div class="seg">
+        <label><input type="radio" name="tax-dir" value="add" checked><span>税抜 → 税込</span></label>
+        <label><input type="radio" name="tax-dir" value="remove"><span>税込 → 税抜</span></label>
+      </div>
+
+      <label class="fld">税率</label>
+      <div class="seg">
+        <label><input type="radio" name="tax-rate" value="10" checked><span>10%（標準）</span></label>
+        <label><input type="radio" name="tax-rate" value="8"><span>8%（軽減）</span></label>
+      </div>
+
+      <button class="btn" id="tax-btn">消費税を計算する</button>
+      <div class="result" id="tax-result" aria-live="polite"></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- でか文字の全画面表示 -->
+<div id="board-overlay" role="dialog" aria-label="でか文字表示。タップすると閉じます">
+  <div id="board-text"></div>
+  <p id="board-close-hint">画面をタップすると閉じます</p>
+</div>
+
+<footer class="bottom">
+  <p>くらしの便利ツール — <a href="index.html">awatake のホームページ</a>へ戻る</p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var yen = function (n) { return n.toLocaleString("ja-JP") + "円"; };
+
+  /* ===== 和暦データ ===== */
+  var ERAS = [
+    { name: "令和", start: new Date(2019, 4, 1),  startYear: 2019 },
+    { name: "平成", start: new Date(1989, 0, 8),  startYear: 1989 },
+    { name: "昭和", start: new Date(1926, 11, 25), startYear: 1926 },
+    { name: "大正", start: new Date(1912, 6, 30), startYear: 1912 },
+    { name: "明治", start: new Date(1868, 9, 23), startYear: 1868 }
+  ];
+  var ETO = ["子（ね）", "丑（うし）", "寅（とら）", "卯（う）", "辰（たつ）", "巳（み）",
+             "午（うま）", "未（ひつじ）", "申（さる）", "酉（とり）", "戌（いぬ）", "亥（い）"];
+  var WEEK = ["日", "月", "火", "水", "木", "金", "土"];
+
+  function toWareki(date) {
+    for (var i = 0; i < ERAS.length; i++) {
+      if (date >= ERAS[i].start) {
+        var y = date.getFullYear() - ERAS[i].startYear + 1;
+        return ERAS[i].name + (y === 1 ? "元" : y) + "年";
+      }
+    }
+    return null;
+  }
+
+  /* ===== 今日の日付バナー ===== */
+  var today = new Date();
+  document.getElementById("today-banner").textContent =
+    "今日は " + today.getFullYear() + "年（" + toWareki(today) + "）" +
+    (today.getMonth() + 1) + "月" + today.getDate() + "日（" + WEEK[today.getDay()] + "）";
+  document.getElementById("ex-reiwa").textContent =
+    toWareki(today) + " → " + today.getFullYear() + "年";
+
+  /* ===== タブ切り替え ===== */
+  var tabs = document.querySelectorAll(".tab-btn");
+  tabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      tabs.forEach(function (t) {
+        t.setAttribute("aria-selected", t === tab ? "true" : "false");
+        document.getElementById(t.getAttribute("aria-controls"))
+          .classList.toggle("active", t === tab);
+      });
+    });
+  });
+
+  /* ===== ツール1: 年齢・年号 ===== */
+  var monthSel = document.getElementById("birth-month");
+  var daySel = document.getElementById("birth-day");
+  for (var m = 1; m <= 12; m++) monthSel.add(new Option(m + "月", m));
+  for (var d = 1; d <= 31; d++) daySel.add(new Option(d + "日", d));
+
+  function showResult(el, html, isError) {
+    el.innerHTML = html;
+    el.classList.add("show");
+    el.classList.toggle("error", !!isError);
+  }
+
+  document.getElementById("calc-age-btn").addEventListener("click", function () {
+    var box = document.getElementById("age-result");
+    var era = document.getElementById("era-select").value;
+    var yRaw = parseInt(document.getElementById("birth-year").value, 10);
+    var mo = parseInt(monthSel.value, 10);
+    var dy = parseInt(daySel.value, 10);
+
+    if (!yRaw || yRaw < 1) {
+      showResult(box, '<p class="big">年を入力してください</p>', true);
+      return;
+    }
+
+    var westernYear = yRaw;
+    if (era !== "西暦") {
+      var eraInfo = ERAS.filter(function (e) { return e.name === era; })[0];
+      westernYear = eraInfo.startYear + yRaw - 1;
+    }
+
+    var birth = new Date(westernYear, mo - 1, dy);
+    if (birth.getMonth() !== mo - 1 || birth.getDate() !== dy) {
+      showResult(box, '<p class="big">その月に ' + dy + "日 はありません</p>", true);
+      return;
+    }
+    if (birth > today) {
+      showResult(box, '<p class="big">未来の日付になっています。年をご確認ください</p>', true);
+      return;
+    }
+    var wareki = toWareki(birth);
+    if (!wareki) {
+      showResult(box, '<p class="big">明治より前の日付には対応していません</p>', true);
+      return;
+    }
+
+    var age = today.getFullYear() - birth.getFullYear();
+    var hadBirthday = (today.getMonth() > birth.getMonth()) ||
+      (today.getMonth() === birth.getMonth() && today.getDate() >= birth.getDate());
+    if (!hadBirthday) age--;
+
+    var note = "";
+    if (era !== "西暦" && wareki.indexOf(era) !== 0) {
+      note = '<p class="sub-line">※ この日付は「' + era + '」ではなく「' + wareki + '」にあたります。</p>';
+    }
+    var nextNote = hadBirthday
+      ? "今年の誕生日を迎えて " + age + "歳です。"
+      : "今年の誕生日で " + (age + 1) + "歳になります。";
+
+    showResult(box,
+      '<p class="big">満 ' + age + "歳</p>" +
+      '<p class="sub-line"><strong>西暦：</strong>' + birth.getFullYear() + "年" + (mo) + "月" + dy + "日（" + WEEK[birth.getDay()] + "曜日）</p>" +
+      '<p class="sub-line"><strong>和暦：</strong>' + wareki + (mo) + "月" + dy + "日</p>" +
+      '<p class="sub-line"><strong>干支：</strong>' + ETO[((birth.getFullYear() - 4) % 12 + 12) % 12] + "</p>" +
+      '<p class="sub-line">' + nextNote + "</p>" + note);
+  });
+
+  /* ===== ツール2: でか文字ボード ===== */
+  var boardInput = document.getElementById("board-input");
+  var overlay = document.getElementById("board-overlay");
+  var boardText = document.getElementById("board-text");
+
+  document.getElementById("preset-chips").addEventListener("click", function (e) {
+    if (e.target.classList.contains("chip")) {
+      boardInput.value = e.target.textContent;
+    }
+  });
+
+  function fitBoardText() {
+    var lo = 10, hi = 600, best = 10;
+    while (lo <= hi) {
+      var mid = Math.floor((lo + hi) / 2);
+      boardText.style.fontSize = mid + "px";
+      if (boardText.scrollHeight <= overlay.clientHeight * 0.9 &&
+          boardText.scrollWidth <= overlay.clientWidth) {
+        best = mid; lo = mid + 1;
+      } else {
+        hi = mid - 1;
+      }
+    }
+    boardText.style.fontSize = best + "px";
+  }
+
+  document.getElementById("show-board-btn").addEventListener("click", function () {
+    var text = boardInput.value.trim();
+    if (!text) text = "文字を入力してください";
+    boardText.textContent = text;
+    var invert = document.querySelector('input[name="board-color"]:checked').value === "invert";
+    overlay.classList.toggle("invert", invert);
+    overlay.classList.add("show");
+    fitBoardText();
+  });
+  overlay.addEventListener("click", function () { overlay.classList.remove("show"); });
+  window.addEventListener("resize", function () {
+    if (overlay.classList.contains("show")) fitBoardText();
+  });
+
+  /* ===== ツール3: 割り勘 ===== */
+  document.getElementById("warikan-btn").addEventListener("click", function () {
+    var box = document.getElementById("warikan-result");
+    var total = parseInt(document.getElementById("warikan-total").value, 10);
+    var people = parseInt(document.getElementById("warikan-people").value, 10);
+    var unit = parseInt(document.querySelector('input[name="warikan-unit"]:checked').value, 10);
+
+    if (!total || total < 1) { showResult(box, '<p class="big">会計金額を入力してください</p>', true); return; }
+    if (!people || people < 1) { showResult(box, '<p class="big">人数を入力してください</p>', true); return; }
+
+    var per = Math.ceil(total / people / unit) * unit;
+    var collected = per * people;
+    var extra = collected - total;
+    var extraNote = extra === 0
+      ? "ちょうど集まります。"
+      : "合計 " + yen(collected) + " 集まり、" + yen(extra) + " 余ります（幹事さんの調整分に）。";
+
+    showResult(box,
+      '<p class="big">一人 ' + yen(per) + "</p>" +
+      '<p class="sub-line">' + yen(total) + " ÷ " + people + "人（" + unit + "円単位で切り上げ）</p>" +
+      '<p class="sub-line">' + extraNote + "</p>");
+  });
+
+  /* ===== ツール3: 消費税 ===== */
+  document.getElementById("tax-btn").addEventListener("click", function () {
+    var box = document.getElementById("tax-result");
+    var amount = parseInt(document.getElementById("tax-amount").value, 10);
+    var dir = document.querySelector('input[name="tax-dir"]:checked').value;
+    var rate = parseInt(document.querySelector('input[name="tax-rate"]:checked').value, 10);
+
+    if (!amount || amount < 1) { showResult(box, '<p class="big">金額を入力してください</p>', true); return; }
+
+    if (dir === "add") {
+      var tax = Math.floor(amount * rate / 100);
+      showResult(box,
+        '<p class="big">税込 ' + yen(amount + tax) + "</p>" +
+        '<p class="sub-line">本体 ' + yen(amount) + " ＋ 消費税（" + rate + "%）" + yen(tax) + "</p>" +
+        '<p class="sub-line">※ 端数は切り捨てで計算しています。</p>');
+    } else {
+      var base = Math.round(amount / (1 + rate / 100));
+      showResult(box,
+        '<p class="big">税抜 ' + yen(base) + "</p>" +
+        '<p class="sub-line">税込 ' + yen(amount) + " − 消費税（" + rate + "%）分 " + yen(amount - base) + "</p>" +
+        '<p class="sub-line">※ 四捨五入のため 1円前後ずれる場合があります。</p>');
+    }
+  });
+})();
+</script>
+</body>
+</html>
